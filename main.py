@@ -74,7 +74,8 @@ async def favicon():
 async def hello(request: Request, name: str = Form(...)):
     if name:
         print('Request for hello page received with name=%s' % name)
-        return templates.TemplateResponse('hello.html', {"request": request, 'name':name})
+        tap = gen_answ(f'I am {name}', '123', 'en')
+        return templates.TemplateResponse('hello.html', {"request": request, 'name':tap})
     else:
         print('Request for hello page received with no name or blank name -- redirecting')
         return RedirectResponse(request.url_for("index"), status_code=status.HTTP_302_FOUND)
